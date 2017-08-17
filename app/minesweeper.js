@@ -4,7 +4,7 @@ export const minesweeper = (boardArray) => {
     const isMineValue = (value) => value === '*';
     const isMine = (board, row, col) => {
         const isOutOfBoard = ((row <= -1) || (col <= -1) || (row >= board.length ) || (col >= board[0].length));
-        return isOutOfBoard ? 0 : isMineValue(board[row][col])
+        return isOutOfBoard ? 0 : isMineValue(board[row][col]) ? 1 : 0;
     };
     const countMinesAround = (board, row, col) =>
         isMine(board, row, col - 1) +
@@ -18,8 +18,8 @@ export const minesweeper = (boardArray) => {
 
 
     const cellProcess = (rowIndex, board) => (cellValue, columnIndex) => {
-        if (cellValue === '*') return '*';
-        return toString(countMinesAround(board, rowIndex, columnIndex));
+        const isItAMine = (cellValue === '*');
+        return isItAMine ? '*' : toString(countMinesAround(board, rowIndex, columnIndex));
     };
 
     const rowProcess = (rowArray, rowIndex, board) => rowArray.map(cellProcess(rowIndex, board));
