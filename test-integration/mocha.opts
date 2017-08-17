@@ -1,0 +1,4 @@
+app/*.integration-spec.js
+--require ./test-integration/common.js
+--recursive
+
